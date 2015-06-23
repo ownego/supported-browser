@@ -1,0 +1,6 @@
+#Ignore
+node_modules/
+bower_components
+
+#Eclipse
+.project

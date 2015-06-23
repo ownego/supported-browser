@@ -1,0 +1,25 @@
+{
+  "name": "supported-browser",
+  "version": "0.0.1",
+  "authors": [
+    "minhnt@ownego.com"
+  ],
+  "description": "Javascript detect supported browser",
+  "main": "supportedbrowser.js",
+  "keywords": [
+    "supported",
+    "browser"
+  ],
+  "license": "MIT",
+  "homepage": "http://ownego.com",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "jquery": ">= 1.9.1"
+  }
+}
