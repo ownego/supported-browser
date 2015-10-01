@@ -3,7 +3,7 @@
 
   $.supportedBrowser = {
     whoami: function(){
-      var ua= navigator.userAgent, tem, 
+      var ua= navigator.userAgent, tem,
       M= ua.match(/(opera|chrome|safari|firefox|msie|trident(?=\/))\/?\s*(\d+)/i) || [];
       if(/trident/i.test(M[1])){
         tem=  /\brv[ :]+(\d+)/g.exec(ua) || [];
@@ -60,12 +60,12 @@
         $modal += '<a class="sb-browser-icon" href="' + obj.url + '" target="_blank"><img src="' + obj.icon + '"/></a>';
         $modal += '<a href="' + obj.url + '" target="_blank">' + obj.name + '</a>';
         $modal += '<p>' + _self.settings.version_text + ' ' + obj.version + '+</p>';
-        $modal += '</div>';    
+        $modal += '</div>';
       });
 
       $modal += '</div>';
       $modal += '</div>';
-      $modal += '</div>';   
+      $modal += '</div>';
       $modal += '</div>';
 
         // Append message to body
@@ -74,12 +74,13 @@
 
     checkSupported: function(current, supported) {
       if(supported[current.name] != undefined) {
-        if(supported[current.name].version <= current.version) return true;
+        if(parseInt(supported[current.name].version) > parseInt(current.version)) return false;
+        else return true;
       }
 
       return false;
     },
-    
+
     detect: function(options) {
       var defaultSettings = {
         "browser": {
@@ -95,10 +96,10 @@
 
       // This is the easiest way to have default options.
       this.settings = $.extend(defaultSettings, options );
-      
+
       this.browser = this.whoami();
 
-      if(!this.checkSupported(this.browser, this.settings.browser)) {
+      if(!this.isSupported()) {
         this.registerBox();
         this.show();
       }

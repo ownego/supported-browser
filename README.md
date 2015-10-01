@@ -38,7 +38,7 @@ $.supportedBrowser.detect({
     "url": "https:\/\/www.mozilla.org\/en-US\/firefox\/products\/",
     "version": "11"
   },
-  "ie": {
+  "msie": {
     "name": "Internet Explorer",
     "icon": "./assets/img/browser/ie.jpg",
     "url": "http:\/\/windows.microsoft.com\/en-us\/internet-explorer\/download-ie",
