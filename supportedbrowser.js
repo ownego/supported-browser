@@ -32,6 +32,9 @@
                           /(playbook)/.exec( ua ) ||
                           /(bb)/.exec( ua ) ||
                           /(blackberry)/.exec( ua ) ||
+                          /(googlebot)/.exec( ua ) ||
+                          /(adsbot-google)/.exec( ua ) ||
+                          /(mediapartners-google)/.exec( ua ) ||
                           [];
 
       return {
@@ -56,11 +59,13 @@
       $modal += '<div class="sb-browser-container sp-clearfix">';
 
       $.each(this.settings.browser, function(key, obj) {
-        $modal += '<div class="sb-browser">';
-        $modal += '<a class="sb-browser-icon" href="' + obj.url + '" target="_blank"><img src="' + obj.icon + '"/></a>';
-        $modal += '<a href="' + obj.url + '" target="_blank">' + obj.name + '</a>';
-        $modal += '<p>' + _self.settings.version_text + ' ' + obj.version + '+</p>';
-        $modal += '</div>';
+        if(obj.name != 'mobile') {
+          $modal += '<div class="sb-browser">';
+          $modal += '<a class="sb-browser-icon" href="' + obj.url + '" target="_blank"><img src="' + obj.icon + '"/></a>';
+          $modal += '<a href="' + obj.url + '" target="_blank">' + obj.name + '</a>';
+          $modal += '<p>' + _self.settings.version_text + ' ' + obj.version + '+</p>';
+          $modal += '</div>';
+        }
       });
 
       $modal += '</div>';
@@ -73,10 +78,48 @@
     },
 
     checkSupported: function(current, supported) {
-      if(supported[current.name] != undefined) {
-        if(parseInt(supported[current.name].version) > parseInt(current.version)) return false;
-        else return true;
+      switch(current.platform) {
+        case 'mac':
+        case 'win':
+        case 'linux':
+          if(supported[current.name] != undefined) {
+            if(parseInt(supported[current.name].version) > parseInt(current.version)) return false;
+            else return true;
+          }
+          break;
+        case 'iphone':
+        case 'ipod':
+        case 'ipad':
+          if(supported['mobile'].ios != undefined) {
+            if(parseInt(supported['mobile'].ios.version) > parseInt(current.version)) return false;
+            else return true;
+          }
+          break;
+        case'googlebot':
+        case'adsbot-google':
+        case'mediapartners-google':
+          return true;
+          break;
+        case 'android':
+          if(supported['mobile'].android != undefined) {
+            if(parseInt(supported['mobile'].android[current.name]) > parseInt(current.version)) return false;
+            else return true;
+          }
+          break;
+        case 'playbook':
+        case 'silk':
+        case 'windows phone':
+          if(supported['mobile'].others != undefined) {
+            if(parseInt(supported['mobile'].others[current.name]) > parseInt(current.version)) return false;
+            else return true;
+          }
+          break;
       }
+
+//      if(supported[current.name] != undefined) {
+//        if(parseInt(supported[current.name].version) > parseInt(current.version)) return false;
+//        else return true;
+//      }
 
       return false;
     },

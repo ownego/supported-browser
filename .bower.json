@@ -1,6 +1,5 @@
 {
   "name": "supported-browser",
-  "version": "0.0.2",
   "authors": [
     "minhnt@ownego.com"
   ],
@@ -21,5 +20,14 @@
   ],
   "dependencies": {
     "jquery": ">= 1.9.1"
-  }
+  },
+  "_release": "329b9f121c",
+  "_resolution": {
+    "type": "branch",
+    "branch": "master",
+    "commit": "329b9f121c2fc53aa05eef9e624c514b15e299a6"
+  },
+  "_source": "https://github.com/ownego/supported-browser.git",
+  "_target": "*",
+  "_originalSource": "https://github.com/ownego/supported-browser.git"
 }
